@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades</title>
+</head>
+<body>
+    <h1>Clases Objetos y Hernecias</h1>
+
+    <button onclick="actividad1()">Actividad 1</button>
+    <button onclick="actividad2()">Actividad 2</button>
+    <button onclick="actividad3()">Actividad 3</button>
+    <button onclick="actividad4()">Actividad 4</button>
+
+    <script>
+        // Clase Vehiculo
+        class Vehiculo {
+            constructor(marca, modelo) {
+                this.marca = marca;
+                this.modelo = modelo;
+            }
+
+            acelerar() {
+                alert(`El ${this.marca} ${this.modelo} está acelerando.`);
+            }
+
+            frenar() {
+                alert(`El ${this.marca} ${this.modelo} está frenando.`);
+            }
+        }
+
+        // Clase Auto, hija de Vehiculo
+        class Auto extends Vehiculo {
+            constructor(marca, modelo, puertas) {
+                super(marca, modelo);
+                this.puertas = puertas;
+            }
+
+            abrirPuertas() {
+                alert(`Se abrieron las ${this.puertas} puertas del ${this.marca} ${this.modelo}.`);
+            }
+        }
+
+        // Clase Moto, hija de Vehiculo
+        class Moto extends Vehiculo {
+            constructor(marca, modelo, cilindrada) {
+                super(marca, modelo);
+                this.cilindrada = cilindrada;
+            }
+
+            encender() {
+                alert(`Se encendió la moto ${this.marca} ${this.modelo} con cilindrada ${this.cilindrada}.`);
+            }
+        }
+
+        // Clase Empleado
+        class Empleado {
+            constructor(nombre, edad, salario) {
+                this.nombre = nombre;
+                this.edad = edad;
+                this.salario = salario;
+            }
+
+            calcularImpuestos() {
+                const impuestos = this.salario * 0.30; 
+                alert(`${this.nombre} debe pagar $${impuestos} en impuestos.`);
+            }
+        }
+
+        // Clase Gerente, hija de Empleado
+        class Gerente extends Empleado {
+            constructor(nombre, edad, salario, departamento) {
+                super(nombre, edad, salario);
+                this.departamento = departamento;
+            }
+
+            asignarBonos(desempenioDepartamento) {
+                const bono = desempenioDepartamento * 20; // Suponiendo que el bono es el 10% del desempeño del departamento
+                alert(`Se asignará un bono de $${bono} en el departamento ${this.departamento}.`);
+            }
+        }
+
+        // Clase Producto
+        class Producto {
+            constructor(nombre, precio, cantidad) {
+                this.nombre = nombre;
+                this.precio = precio;
+                this.cantidad = cantidad;
+            }
+
+            calcularTotal() {
+                return this.precio * this.cantidad;
+            }
+
+            actualizarStock(nuevaCantidad) {
+                this.cantidad = nuevaCantidad;
+            }
+        }
+
+        // Clase ProductoImportado, hija de Producto
+        class ProductoImportado extends Producto {
+            constructor(nombre, precio, cantidad, impuesto) {
+                super(nombre, precio, cantidad);
+                this.impuesto = impuesto;
+            }
+
+            calcularTotal() {
+                return super.calcularTotal() * (1 + this.impuesto);
+            }
+        }
+
+        class Reloj extends Tiempo {
+    constructor() {
+        // Obtener la hora actual del sistema
+        const ahora = new Date();
+        const horaActual = ahora.getHours();
+        const minutoActual = ahora.getMinutes();
+        const segundoActual = ahora.getSeconds();
+        super(horaActual, minutoActual, segundoActual);
+        this.intervalo = null;
+    }
+
+    iniciar() {
+        this.intervalo = setInterval(() => {
+            this.sumarSegundos(1); // Sumar 1 segundo cada vez que se llame el intervalo
+            alert(`${this.hora}:${this.minuto}:${this.segundo}`);
+        }, 1000); // Llamar cada 1000 milisegundos (1 segundo)
+    }
+
+    detener() {
+        clearInterval(this.intervalo); // Detener el intervalo
+        alert("El reloj ha sido detenido.");
+    }
+}
+
+        // Función para realizar la actividad 1
+        function actividad1() {
+            const auto = new Auto("Toyota", "Corolla", 4);
+            alert("Acelerando el auto...");
+            auto.acelerar();
+            alert("Frenando el auto...");
+            auto.frenar();
+            alert("Abriendo las puertas del auto... Sacando pistola para exterminar posible mente pueblos indigenas");
+            auto.abrirPuertas();
+        }
+
+        // Función para realizar la actividad 2
+        function actividad2() {
+            const gerente = new Gerente("Juan", 35, 5000, "Ventas");
+            alert("Calculando impuestos del gerente...");
+            gerente.calcularImpuestos();
+            alert("Asignando bonos al departamento...");
+            gerente.asignarBonos(0.8);
+        }
+
+        // Función para realizar la actividad 3
+        function actividad3() {
+            const producto = new Producto("Producto1", 10, 5);
+            alert("Total del producto: 30", producto.calcularTotal());
+            producto.actualizarStock(8);
+            alert("Nuevo total del producto: 50 ", producto.calcularTotal());
+
+            const productoImportado = new ProductoImportado("Producto2", 20, 3, 0.1);
+            alert("Total del producto importado: 20", productoImportado.calcularTotal());
+        }
+
+        // Función para realizar la actividad 4
+            function actividad4() {
+        const reloj = new Reloj();
+        reloj.iniciar(); // Iniciar el reloj
+        setTimeout(() => {
+            reloj.detener(); 
+        }, 5000);
+    }
+    </script>
+</body>
+</html>
+
